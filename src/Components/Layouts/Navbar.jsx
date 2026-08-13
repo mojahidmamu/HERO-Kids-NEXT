@@ -72,14 +72,26 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-
+ 
       {/* Right Side */}
-      <div className="navbar-end">
-        <Link href="/cart" className="btn btn-ghost btn-dash">
-          <TiShoppingCart />
+      <div className="navbar-end gap-2 sm:gap-3">
+        {/* Cart */}
+        <Link
+          href="/cart"
+          className="btn btn-ghost btn-circle relative"
+          aria-label="Shopping cart"
+        >
+          <TiShoppingCart className="text-2xl" />
+
+          {/* Cart Count */}
+          <span className="badge badge-primary badge-sm absolute -top-1 -right-1">
+            0
+          </span>
         </Link>
-        <Link href="/login">
-          <button className="btn btn-primary btn-outline">Login</button>
+
+        {/* Login */}
+        <Link href="/login" className="btn btn-primary btn-outline sm:btn-md px-5">
+          Login
         </Link>
       </div>
     </div>
