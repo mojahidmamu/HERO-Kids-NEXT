@@ -1,10 +1,33 @@
 import React from "react";
-import Logo from "./Logo.jsx";
+import Logo from "./Logo";
+import Link from "next/link";
+import { TiShoppingCart } from "react-icons/ti";
 
 const Navbar = () => {
+  const navLinks = [
+    {
+      href: "/",
+      label: "Home",
+    },
+    {
+      href: "/products",
+      label: "Products",
+    },
+    {
+      href: "/blog",
+      label: "Blog",
+    },
+    {
+      href: "/contact",
+      label: "Contact",
+    },
+  ];
+
   return (
-    <div className="navbar bg-base-100  ">
+    <div className="navbar bg-base-100">
+      {/* Left Side */}
       <div className="navbar-start">
+        {/* Mobile Menu */}
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -14,66 +37,50 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
           </div>
+
           <ul
-            tabIndex="-1"
+            tabIndex={-1}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <Logo></Logo>
+        {/* Logo */}
+        <Logo />
       </div>
+
+      {/* Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2 bg-base-100 w-40 z-1">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href}>{link.label}</Link>
+            </li>
+          ))}
         </ul>
       </div>
+
+      {/* Right Side */}
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <Link href="/cart" className="btn btn-ghost btn-dash">
+          <TiShoppingCart />
+        </Link>
+        <Link href="/login">
+          <button className="btn btn-primary btn-outline">Login</button>
+        </Link>
       </div>
     </div>
   );
