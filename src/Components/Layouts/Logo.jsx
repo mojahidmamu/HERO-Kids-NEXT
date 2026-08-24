@@ -1,5 +1,8 @@
-import React from "react";
+import Image from "next/image";
 import Link from "next/link";
+{
+  /* <Image alt="Logo" src={"/assets/logo.png"} width={65} height={50}></Image> */
+}
 
 const Logo = () => {
   return (
@@ -14,7 +17,53 @@ const Logo = () => {
         <div className="absolute inset-1 rounded-xl border border-white/20" />
 
         {/* Brand Symbol */}
-        <span className="relative text-xl font-black text-white">M</span>
+        {/* Brand Symbol */}
+        <div
+          className="
+    relative
+    flex h-12 w-12
+    items-center justify-center
+    rounded-2xl
+    border border-pink-100
+    bg-white
+    p-1.5
+    shadow-[0_4px_14px_rgba(236,72,153,0.15)]
+    ring-1 ring-slate-100
+    transition-all duration-300 ease-out
+    group-hover:-translate-y-0.5
+    group-hover:scale-105
+    group-hover:border-pink-200
+    group-hover:shadow-[0_8px_22px_rgba(236,72,153,0.22)]
+  "
+        >
+          <Image
+            alt="Hero Kidz Logo"
+            src="/assets/logo.png"
+            width={65}
+            height={50}
+            priority
+            className="
+      h-full
+      w-full
+      object-contain
+      rounded-xl
+      transition-transform duration-300
+      group-hover:scale-105
+    "
+          />
+
+          {/* Small decorative dot */}
+          <span
+            className="
+      absolute -right-1 -top-1
+      h-3 w-3
+      rounded-full
+      border-2 border-white
+      bg-pink-500
+      shadow-sm
+    "
+          />
+        </div>
 
         {/* Small Star */}
         <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-yellow-400 text-[9px] shadow-sm transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
@@ -36,5 +85,4 @@ const Logo = () => {
     </Link>
   );
 };
-
 export default Logo;
