@@ -73,13 +73,13 @@ const ProductDetails = ({ product }) => {
     info = [],
   } = product;
 
-  // ডিসকাউন্ট প্রাইস ক্যালকুলেট
+  //Calculate discounted price if percentage is available
   const discountedPrice = percentage
     ? Math.round(price - (price * percentage) / 100)
     : price;
   const originalPrice = percentage ? price : null;
 
-  // স্টার রেটিং
+  // Render star ratings
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => (
       <FiStar
@@ -96,7 +96,7 @@ const ProductDetails = ({ product }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-pink-50 py-8">
       <div className="container mx-auto max-w-6xl px-4">
-        {/* ===== নেভিগেশন ===== */}
+        {/* Navigation */}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link
@@ -124,9 +124,9 @@ const ProductDetails = ({ product }) => {
           </div>
         </div>
 
-        {/* ===== মেইন কন্টেন্ট ===== */}
+        {/* Product Image and Details */}
         <div className="grid gap-8 lg:grid-cols-2">
-          {/* ===== ইমেজ সেকশন ===== */}
+          {/* Product Image */}
           <div className="group relative overflow-hidden rounded-3xl bg-white p-4 shadow-2xl">
             <div className="relative aspect-square overflow-hidden rounded-2xl">
               <Image
@@ -138,14 +138,14 @@ const ProductDetails = ({ product }) => {
                 priority
               />
 
-              {/* ডিসকাউন্ট ব্যাজ */}
+              {/* Discount Badge */}
               {percentage > 0 && (
                 <div className="absolute left-4 top-4 rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-4 py-2 text-sm font-bold text-white shadow-lg">
                   -{percentage}%
                 </div>
               )}
 
-              {/* সোল্ড কাউন্ট */}
+              {/* Sold Count */}
               {sold > 0 && (
                 <div className="absolute bottom-4 right-4 rounded-full bg-black/60 px-4 py-2 text-sm text-white backdrop-blur-sm">
                   🔥 {sold} sold
@@ -153,7 +153,7 @@ const ProductDetails = ({ product }) => {
               )}
             </div>
 
-            {/* থাম্বনেইল গ্যালারি */}
+            {/* Thumbnail Gallery */}
             <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
               {[image, image, image, image].map((img, idx) => (
                 <div
@@ -172,9 +172,9 @@ const ProductDetails = ({ product }) => {
             </div>
           </div>
 
-          {/* ===== ডিটেইলস সেকশন ===== */}
+          {/* ===== Product Details Section ===== */}
           <div className="space-y-6">
-            {/* টাইটেল */}
+            {/* Title */}
             <div>
               <h1 className="text-3xl font-extrabold text-slate-800 lg:text-4xl">
                 {title}
@@ -184,7 +184,7 @@ const ProductDetails = ({ product }) => {
               )}
             </div>
 
-            {/* রেটিং */}
+            {/* Rating */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
                 {renderStars(ratings)}
@@ -197,7 +197,7 @@ const ProductDetails = ({ product }) => {
               </span>
             </div>
 
-            {/* প্রাইস */}
+            {/* Price */}
             <div className="flex items-end gap-3 rounded-2xl bg-gradient-to-r from-pink-50 to-purple-50 p-4">
               <span className="text-4xl font-extrabold text-pink-500">
                 ৳{discountedPrice}
@@ -214,7 +214,7 @@ const ProductDetails = ({ product }) => {
               )}
             </div>
 
-            {/* ইনফো পয়েন্টস */}
+            {/* Info Points */}
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {info.map((item, idx) => (
                 <div
@@ -227,7 +227,7 @@ const ProductDetails = ({ product }) => {
               ))}
             </div>
 
-            {/* ডেলিভারি তথ্য */}
+            {/* Delivery Information */}
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm">
                 <FiTruck className="text-blue-500" size={20} />
@@ -263,7 +263,7 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
 
-            {/* অ্যাকশন বাটন */}
+            {/* Action Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row">
               <button className="flex-1 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 py-4 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
                 <span className="flex items-center justify-center gap-2">
@@ -278,7 +278,7 @@ const ProductDetails = ({ product }) => {
           </div>
         </div>
 
-        {/* ===== বিবরণ সেকশন ===== */}
+        {/* ===== Product Description Section ===== */}
         <div className="mt-12 rounded-3xl bg-white p-6 shadow-xl lg:p-8">
           <h2 className="mb-4 text-2xl font-bold text-slate-800">
             📖 Product Description
@@ -292,7 +292,7 @@ const ProductDetails = ({ product }) => {
           </div>
         </div>
 
-        {/* ===== Q&A সেকশন ===== */}
+        {/* ===== Q&A Section ===== */}
         {qna.length > 0 && (
           <div className="mt-8 rounded-3xl bg-white p-6 shadow-xl lg:p-8">
             <h2 className="mb-6 text-2xl font-bold text-slate-800">
@@ -317,7 +317,7 @@ const ProductDetails = ({ product }) => {
           </div>
         )}
 
-        {/* ===== সম্পর্কিত প্রোডাক্ট ===== */}
+        {/*  Related Products  */}
         <div className="mt-12">
           <h2 className="mb-6 text-2xl font-bold text-slate-800">
             🔗 You May Also Like
