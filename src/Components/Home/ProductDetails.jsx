@@ -1,7 +1,6 @@
 // src/app/products/[id]/page.jsx
 "use client";
 
-import products from "@/src/data/toys.json";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +18,7 @@ import {
   FiPlus,
   FiHome,
 } from "react-icons/fi";
+import products from "@/src/data/toys.json";
 
 // স্ট্যাটিক প্যারামিটার জেনারেট
 export async function generateStaticParams() {
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
 
 // মেটাডেটা
 export async function generateMetadata({ params }) {
-  const product = products.find((p) => p.id === parseInt(params.id));
+  const product = products.find((p) => p.id === params.id);
   if (!product) return { title: "Product Not Found" };
 
   return {
@@ -39,10 +39,16 @@ export async function generateMetadata({ params }) {
 }
 
 const ProductDetailsPage = ({ params }) => {
-  const product = products.find((p) => p.id === parseInt(params.id));
+//   const product = products.find((p) => p.id === parseInt(params.id));
+
+  const productId =  params.id;
+//   console.log("Product ID (parsed):", productId);
+
+  const product = products.find((p) => p.id === productId);
+//   console.log("Found product:", product);
 
   if (!product) {
-    notFound();
+    return <div>Product not found</div>;
   }
 
   return <ProductDetails product={product} />;
