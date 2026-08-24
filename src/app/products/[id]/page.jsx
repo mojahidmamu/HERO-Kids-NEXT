@@ -1,27 +1,48 @@
-// src/app/products/page.jsx
+// src/app/products/[id]/page.jsx
+
+import { notFound } from "next/navigation";
 import products from "@/src/data/toys.json";
 import ProductDetails from "@/src/Components/Home/ProductDetails";
 
-export const metadata = {
-  title: "All Products - Hero Kidz",
-  description: "Discover premium toys and educational products for kids",
-};
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id.toString(),
+  }));
+}
 
-const ProductsPage = () => {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-slate-800">All Products</h1>
-        <p className="text-slate-500">Showing {products.length} items</p>
-      </div>
-      
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => (
-          <ProductDetails key={product.id} product={product} />
-        ))}
-      </div>
-    </div>
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const product = products.find(
+    (product) => product.id === Number(id)
   );
-};
 
-export default ProductsPage;
+  if (!product) {
+    return {
+      title: "Product Not Found",
+    };
+  }
+
+  return {
+    title: `${product.title} - Hero Kidz`,
+    description:
+      product.description?.slice(0, 160) ||
+      "Premium kids products",
+  };
+}
+
+export default async function ProductPage({ params }) {
+  const { id } = await params;
+
+  const product = products.find(
+    (product) => product.id === Number(id)
+  );
+
+  if (!product) {
+    notFound();
+  }
+
+  return (
+    <ProductDetails product={product} />
+  );
+}

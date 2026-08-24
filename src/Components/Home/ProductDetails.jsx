@@ -20,16 +20,19 @@ import {
 } from "react-icons/fi";
 import products from "@/src/data/toys.json";
 
-// স্ট্যাটিক প্যারামিটার জেনারেট
+//  
 export async function generateStaticParams() {
   return products.map((product) => ({
     id: product.id.toString(),
   }));
 }
 
-// মেটাডেটা
+//  
 export async function generateMetadata({ params }) {
-  const product = products.find((p) => p.id === params.id);
+  const { id } = await params;
+  const productId = Number(id);
+
+  const product = products.find((p) => p.id === productId);
   if (!product) return { title: "Product Not Found" };
 
   return {
@@ -38,14 +41,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const ProductDetailsPage = ({ params }) => {
-//   const product = products.find((p) => p.id === parseInt(params.id));
-
-  const productId =  params.id;
-//   console.log("Product ID (parsed):", productId);
-
-  const product = products.find((p) => p.id === productId);
-//   console.log("Found product:", product);
+const ProductDetailsPage = ({ product  }) => {
+  
+   
 
   if (!product) {
     return <div>Product not found</div>;
@@ -56,9 +54,9 @@ const ProductDetailsPage = ({ params }) => {
 
 export default ProductDetailsPage;
 
-// ============================================
-// প্রোডাক্ট ডিটেইলস কম্পোনেন্ট
-// ============================================
+
+
+// Product Details Page..
 const ProductDetails = ({ product }) => {
   const {
     id,
