@@ -4,16 +4,22 @@ import "./globals.css";
 import Navbar from "@/src/Components/Layouts/Navbar";
 import Footer from "@/src/Components/Layouts/Footer";
 // import localFont from "next/font/local";
- 
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-poppins",
 });
- 
+
+export const metadata = {
+  title: {
+    default: "HERO Kidz",
+    template: "%s | HERO Kidz",
+  },
+};
+
 // const solaimanLipi = localFont({
-//   src: "./fonts/SolaimanLipi.ttf", 
+//   src: "./fonts/SolaimanLipi.ttf",
 //   weight: "400",
 //   variable: "--font-bangla",
 // });

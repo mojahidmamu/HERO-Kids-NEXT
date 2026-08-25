@@ -16,7 +16,7 @@ const Logo = () => {
         {/* Decorative Circle */}
         <div className="absolute inset-1 rounded-xl border border-white/20" />
 
-        {/* Brand Symbol */}
+        
         {/* Brand Symbol */}
         <div
           className="

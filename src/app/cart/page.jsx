@@ -1,16 +1,16 @@
 import React from 'react';
 
 export const metadata = {
-  title: "Login Page", 
+  title: "Cart Page", 
   description: "Explore our wide range of products and find the perfect fit for your needs. From innovative solutions to everyday essentials, we have something for everyone.",
 };
 
-const Login = () => {
+const Cart = () => {
     return (
         <div>
-            <h1>this is the login page</h1>
+            <h1>All card here,, added to cart</h1>
         </div>
     );
 };
 
-export default Login;
+export default Cart;
