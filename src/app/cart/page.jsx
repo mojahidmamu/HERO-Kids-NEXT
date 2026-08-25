@@ -1,4 +1,5 @@
 import React from 'react';
+import CartPage from '../../Components/Cart/CartPage';
 
 export const metadata = {
   title: "Cart Page", 
@@ -6,11 +7,7 @@ export const metadata = {
 };
 
 const Cart = () => {
-    return (
-        <div>
-            <h1>All card here,, added to cart</h1>
-        </div>
-    );
+    return  <CartPage></CartPage>
 };
 
 export default Cart;

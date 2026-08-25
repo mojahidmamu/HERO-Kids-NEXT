@@ -19,6 +19,8 @@ import {
   FiHome,
 } from "react-icons/fi";
 import products from "@/src/data/toys.json";
+import AddToCartButton from "@/src/Components/buttons/AddToCartButton";
+import BuyNowButton from "../buttons/BuyNowButton";
 
 //  
 export async function generateStaticParams() {
@@ -171,8 +173,7 @@ const ProductDetails = ({ product }) => {
               ))}
             </div>
           </div>
-
-          {/* ===== Product Details Section ===== */}
+ 
           <div className="space-y-6">
             {/* Title */}
             <div>
@@ -265,15 +266,17 @@ const ProductDetails = ({ product }) => {
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button className="flex-1 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 py-4 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
+              {/* <button className="flex-1 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 py-4 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
                 <span className="flex items-center justify-center gap-2">
                   <FiShoppingCart size={20} />
                   Add to Cart
                 </span>
-              </button>
-              <button className="rounded-2xl border-2 border-pink-200 bg-white px-8 py-4 font-bold text-pink-500 transition-all hover:border-pink-500 hover:bg-pink-50 hover:shadow-lg">
+              </button> */}
+              <AddToCartButton product={product}></AddToCartButton>
+              {/* <button className="rounded-xl border-2 border-pink-200 bg-white px-8   font-bold text-pink-500 transition-all hover:border-pink-500 hover:bg-pink-50 hover:shadow-lg">
                 Buy Now
-              </button>
+              </button> */}
+              <BuyNowButton product={product}></BuyNowButton>
             </div>
           </div>
         </div>

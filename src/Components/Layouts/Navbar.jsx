@@ -1,10 +1,29 @@
+"use client";
+
 import React from "react";
 import Logo from "./Logo";
 import Link from "next/link";
 import { TiShoppingCart } from "react-icons/ti";
-import { FiMenu, FiX } from "react-icons/fi";
+import { usePathname } from "next/navigation";
+
+import {
+  FiMenu,
+  FiX,
+  FiHome,
+  FiPackage,
+  FiBookOpen,
+  FiMail,
+} from "react-icons/fi";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  // Get cart information
+  const { getTotalItems } = useCart();
+  const totalItems = getTotalItems();
+
   const navLinks = [
     {
       href: "/",
@@ -88,15 +107,39 @@ const Navbar = () => {
           {/* Cart */}
           <Link
             href="/cart"
-            aria-label="Shopping cart"
+            aria-label={`Shopping cart with ${totalItems} items`}
             className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-pink-200 hover:bg-pink-50 hover:text-pink-500 hover:shadow-md"
           >
             <TiShoppingCart className="text-2xl transition-transform duration-300 group-hover:scale-110" />
 
-            {/* Cart Count */}
-            <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-pink-500 px-1 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
-              0
-            </span>
+            {/* Dynamic Cart Count */}
+            <AnimatePresence mode="popLayout">
+              {totalItems > 0 && (
+                <motion.span
+                  key={totalItems}
+                  initial={{
+                    scale: 0,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    scale: 1,
+                    opacity: 1,
+                  }}
+                  exit={{
+                    scale: 0,
+                    opacity: 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 20,
+                  }}
+                  className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-pink-500 px-1 text-[10px] font-bold text-white shadow-md ring-2 ring-white"
+                >
+                  {totalItems > 99 ? "99+" : totalItems}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </Link>
 
           {/* Login */}

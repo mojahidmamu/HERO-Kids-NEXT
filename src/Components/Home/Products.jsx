@@ -17,6 +17,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import products from "@/src/data/toys.json";
+import CardButton from "../buttons/AddToCartButton";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -310,9 +311,7 @@ const Products = () => {
 
                 {/* Add to Cart (in Grid View) */}
                 {viewMode === "grid" && (
-                  <button className="mt-3 w-full rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 py-2.5 font-medium text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
-                    Add to Cart
-                  </button>
+                  <CardButton product={product}></CardButton>
                 )}
               </div>
             </motion.div>
