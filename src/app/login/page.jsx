@@ -1,5 +1,5 @@
-import React from 'react';
-import LoginForm from '../../Components/auth/LoginForm';
+import React from 'react'; 
+import LoginPage from '../../Components/auth/LoginPage';
 
 export const metadata = {
   title: "Login Page", 
@@ -10,7 +10,7 @@ const Login = () => {
     return (
         <div>
             <h1>this is the login page</h1>
-            <LoginForm />
+            <LoginPage></LoginPage>
         </div>
     );
 };
