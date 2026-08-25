@@ -3,11 +3,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { useCart } from "@/context/CartContext";
+import { useSession } from "next-auth/react"; 
 import { FiShoppingCart, FiCheck, FiLoader, FiLock } from "react-icons/fi";
 import CartModal from "./CartModal";
 import { motion } from "framer-motion";
+import { useCart } from "../context/CartContext";
 
 const AddToCartButton = ({ product, className = "" }) => {
   const { data: session, status } = useSession();
