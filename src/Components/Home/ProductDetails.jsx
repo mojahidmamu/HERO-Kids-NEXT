@@ -21,15 +21,16 @@ import {
 import products from "@/src/data/toys.json";
 import AddToCartButton from "@/src/Components/buttons/AddToCartButton";
 import BuyNowButton from "../buttons/BuyNowButton";
+import { useWishlist } from "@/src/Components/context/WishlistContext";
 
-//  
+//
 export async function generateStaticParams() {
   return products.map((product) => ({
     id: product.id.toString(),
   }));
 }
 
-//  
+//
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const productId = Number(id);
@@ -43,10 +44,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const ProductDetailsPage = ({ product  }) => {
-  
-   
-
+const ProductDetailsPage = ({ product }) => {
   if (!product) {
     return <div>Product not found</div>;
   }
@@ -55,8 +53,6 @@ const ProductDetailsPage = ({ product  }) => {
 };
 
 export default ProductDetailsPage;
-
-
 
 // Product Details Page..
 const ProductDetails = ({ product }) => {
@@ -74,6 +70,9 @@ const ProductDetails = ({ product }) => {
     ratings = 4.5,
     info = [],
   } = product;
+
+  const { addToWishlist, isInWishlist } = useWishlist();
+  const isWishlisted = isInWishlist(product.id);
 
   //Calculate discounted price if percentage is available
   const discountedPrice = percentage
@@ -173,7 +172,7 @@ const ProductDetails = ({ product }) => {
               ))}
             </div>
           </div>
- 
+
           <div className="space-y-6">
             {/* Title */}
             <div>
@@ -266,16 +265,23 @@ const ProductDetails = ({ product }) => {
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 sm:flex-row">
-              {/* <button className="flex-1 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 py-4 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
-                <span className="flex items-center justify-center gap-2">
-                  <FiShoppingCart size={20} />
-                  Add to Cart
-                </span>
-              </button> */}
+              {/* উইশলিস্ট বাটন */}
+              <button
+                onClick={() => addToWishlist(product)}
+                className={`flex items-center gap-2 rounded-2xl px-6 py-3.5 font-semibold transition-all hover:scale-105 ${
+                  isWishlisted
+                    ? "bg-pink-500 text-white shadow-lg shadow-pink-200"
+                    : "border-2 border-pink-200 bg-white text-pink-500 hover:bg-pink-50"
+                }`}
+              >
+                <FiHeart
+                  className={isWishlisted ? "fill-white" : ""}
+                  size={20}
+                />
+                {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
+              </button>
+
               <AddToCartButton product={product}></AddToCartButton>
-              {/* <button className="rounded-xl border-2 border-pink-200 bg-white px-8   font-bold text-pink-500 transition-all hover:border-pink-500 hover:bg-pink-50 hover:shadow-lg">
-                Buy Now
-              </button> */}
               <BuyNowButton product={product}></BuyNowButton>
             </div>
           </div>

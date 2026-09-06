@@ -18,7 +18,7 @@ export const WishlistProvider = ({ children }) => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  
+  // LocalStorage থেকে উইশলিস্ট লোড করা
   useEffect(() => {
     const storedWishlist = localStorage.getItem("wishlist");
     if (storedWishlist) {
@@ -32,23 +32,23 @@ export const WishlistProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-   
+  // LocalStorage-এ উইশলিস্ট সেভ করা
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
     }
   }, [wishlistItems, isLoading]);
 
-  
+  // উইশলিস্টে প্রোডাক্ট যোগ করা
   const addToWishlist = (product) => {
     setWishlistItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
       if (existingItem) {
-        
+        // ইতিমধ্যে থাকলে রিমুভ করবে (টগল)
         return prevItems.filter((item) => item.id !== product.id);
       } else {
-        
+        // নতুন যোগ করবে
         toast.success(`${product.title} added to wishlist! ❤️`, {
           duration: 2000,
           position: "bottom-right",
@@ -57,8 +57,9 @@ export const WishlistProvider = ({ children }) => {
         return [...prevItems, product];
       }
     });
-  }; 
+  };
 
+  // উইশলিস্ট থেকে রিমুভ করা
   const removeFromWishlist = (productId) => {
     setWishlistItems((prevItems) => {
       const item = prevItems.find((item) => item.id === productId);
@@ -72,12 +73,12 @@ export const WishlistProvider = ({ children }) => {
     });
   };
 
-  
+  // চেক করা কোন প্রোডাক্ট উইশলিস্টে আছে কিনা
   const isInWishlist = (productId) => {
     return wishlistItems.some((item) => item.id === productId);
   };
 
- 
+  // উইশলিস্ট ক্লিয়ার করা
   const clearWishlist = () => {
     setWishlistItems([]);
     toast.success("Wishlist cleared", {

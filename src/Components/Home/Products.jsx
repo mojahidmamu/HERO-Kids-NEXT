@@ -18,6 +18,7 @@ import {
 } from "react-icons/fi";
 import products from "@/src/data/toys.json";
 import CardButton from "../buttons/AddToCartButton";
+import { useWishlist } from "../context/WishlistContext";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -26,6 +27,9 @@ const Products = () => {
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [wishlist, setWishlist] = useState([]);
   const [hoveredProduct, setHoveredProduct] = useState(null);
+
+  const { addToWishlist, isInWishlist } = useWishlist();
+  const isWishlisted = isInWishlist(product.id);
 
   const categories = useMemo(() => {
     const cats = products.map((p) => p.category || "Uncategorized");
@@ -218,20 +222,18 @@ const Products = () => {
                     </div>
                   )}
 
-                  {/* Wishlist Button */}
-                  <button
-                    onClick={() => toggleWishlist(product.id)}
-                    className="absolute right-3 top-3 rounded-full bg-white/80 p-2 backdrop-blur-sm transition-all hover:scale-110 hover:bg-white"
-                  >
-                    <FiHeart
-                      className={`transition-colors ${
-                        wishlist.includes(product.id)
-                          ? "fill-red-500 text-red-500"
-                          : "text-slate-600"
-                      }`}
-                      size={20}
-                    />
-                  </button>
+                  {/* Wishlist Button */} 
+      <button
+        onClick={() => addToWishlist(product)}
+        className={`absolute right-3 top-3 rounded-full bg-white/80 p-2 backdrop-blur-sm transition-all hover:scale-110 ${
+          isWishlisted ? "bg-pink-500 text-white" : "text-slate-600"
+        }`}
+      >
+        <FiHeart
+          className={isWishlisted ? "fill-white" : ""}
+          size={20}
+        />
+      </button>
 
                   {/* Hover Overlay Action */}
                   <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
