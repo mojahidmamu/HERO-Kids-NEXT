@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@auth/core": "^0.34.3",
     "bcryptjs": "^3.0.3",
     "daisyui": "^5.7.16",
     "framer-motion": "^13.1.1",

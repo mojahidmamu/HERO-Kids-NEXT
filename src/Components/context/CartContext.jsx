@@ -18,7 +18,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // LocalStorage থেকে কার্ট লোড করা
+  // LocalStorage  
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -32,32 +32,32 @@ export const CartProvider = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-  // LocalStorage-এ কার্ট সেভ করা
+  //  add cart to localstorage 
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem("cart", JSON.stringify(cartItems));
     }
   }, [cartItems, isLoading]);
 
-  // কার্টে আইটেম যোগ করা
+  //  
   const addToCart = (product, quantity = 1) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // আইটেম থাকলে quantity বাড়ানো
+        //  
         return prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item,
         );
       } else {
-        // নতুন আইটেম যোগ করা
+        //  
         return [...prevItems, { ...product, quantity }];
       }
     });
 
-    // সাকসেস মেসেজ
+    //  
     toast.success(`${product.title} added to cart!`, {
       duration: 3000,
       position: "bottom-right",
@@ -65,7 +65,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // কার্ট থেকে আইটেম রিমুভ করা
+  // 
   const removeFromCart = (productId) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.id !== productId),
@@ -76,7 +76,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // আইটেমের quantity আপডেট করা
+  //  
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) {
       removeFromCart(productId);
@@ -90,7 +90,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // কার্ট ক্লিয়ার করা
+  //  
   const clearCart = () => {
     setCartItems([]);
     toast.success("Cart cleared", {
@@ -99,12 +99,12 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // কার্টের মোট আইটেম সংখ্যা
+  // 
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
-  // কার্টের মোট মূল্য
+  //  
   const getTotalPrice = () => {
     return cartItems.reduce(
       (total, item) => total + item.price * item.quantity,

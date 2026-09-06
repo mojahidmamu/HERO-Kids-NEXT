@@ -7,15 +7,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { 
-  FcGoogle,
-  FiGithub,
-  FiMail,
-  FiLock,
-  FiArrowRight,
-  FiHome,
-  FiAlertCircle
-} from "react-icons/fi";
+import { FaGoogle } from "react-icons/fa"; // ✅ সঠিক আইকন
+import { FiArrowRight, FiHome, FiAlertCircle } from "react-icons/fi";
 
 const LoginPage = () => {
   const { data: session, status } = useSession();
@@ -32,16 +25,17 @@ const LoginPage = () => {
     }
   }, [status, router, callbackUrl]);
 
-  const handleSocialLogin = async (provider) => {
+  // Google Sign-In
+  const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError("");
     try {
-      await signIn(provider, { 
+      await signIn("google", {
         callbackUrl: callbackUrl,
-        redirect: true 
+        redirect: true,
       });
     } catch (error) {
-      setError("Login failed. Please try again.");
+      setError("Google login failed. Please try again.");
       setIsLoading(false);
     }
   };
@@ -51,17 +45,14 @@ const LoginPage = () => {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-pink-500 border-t-transparent mx-auto" />
+          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-pink-500 border-t-transparent" />
           <p className="mt-4 text-slate-500">Loading...</p>
         </div>
       </div>
     );
   }
 
-  // ইতিমধ্যে লগইন থাকলে কিছু দেখাবে না (রিডাইরেক্ট হবে)
-  if (status === "authenticated") {
-    return null;
-  }
+  if (status === "authenticated") return null;
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50">
@@ -100,7 +91,6 @@ const LoginPage = () => {
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-          {/* কার্ড */}
           <div className="relative overflow-hidden rounded-3xl bg-white/80 p-8 shadow-2xl backdrop-blur-xl">
             {/* হোম বাটন */}
             <Link
@@ -123,7 +113,6 @@ const LoginPage = () => {
               </div>
             </div>
 
-            {/* হেডিং */}
             <div className="mt-4 text-center">
               <h1 className="text-3xl font-extrabold text-slate-800">
                 Welcome Back! 👋
@@ -145,72 +134,28 @@ const LoginPage = () => {
               </motion.div>
             )}
 
-            {/* সোশ্যাল লগইন বাটন */}
-            <div className="mt-6 space-y-3">
-              {/* Google Login */}
+            {/* শুধু Google Login */}
+            <div className="mt-6">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleSocialLogin("google")}
+                onClick={handleGoogleSignIn}
                 disabled={isLoading}
                 className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl border border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-pink-300 hover:bg-pink-50 hover:shadow-lg disabled:opacity-70"
               >
-                <FcGoogle size={24} />
+                <FaGoogle className="text-2xl text-red-500" />
                 <span>Continue with Google</span>
                 <FiArrowRight className="absolute right-4 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
               </motion.button>
-
-              {/* GitHub Login */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleSocialLogin("github")}
-                disabled={isLoading}
-                className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl border border-slate-200 bg-white px-6 py-3.5 font-medium text-slate-700 transition-all hover:border-purple-300 hover:bg-purple-50 hover:shadow-lg disabled:opacity-70"
-              >
-                <FiGithub size={24} />
-                <span>Continue with GitHub</span>
-                <FiArrowRight className="absolute right-4 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
-              </motion.button>
-            </div>
-
-            {/* ডিভাইডার */}
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-4 text-slate-400">or continue with</span>
-              </div>
-            </div>
-
-            {/* ইমেইল লগইন */}
-            <div className="space-y-3">
-              <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pl-10 text-sm outline-none transition-all focus:border-pink-300 focus:ring-2 focus:ring-pink-200"
-                />
-              </div>
-              <div className="relative">
-                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pl-10 text-sm outline-none transition-all focus:border-pink-300 focus:ring-2 focus:ring-pink-200"
-                />
-              </div>
-              <button className="w-full rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 py-3 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
-                Sign In
-              </button>
             </div>
 
             {/* সাইনআপ লিংক */}
             <p className="mt-6 text-center text-sm text-slate-500">
               Don't have an account?{" "}
-              <Link href="/register" className="font-semibold text-pink-500 hover:underline">
+              <Link
+                href="/register"
+                className="font-semibold text-pink-500 hover:underline"
+              >
                 Sign up
               </Link>
             </p>
@@ -220,7 +165,9 @@ const LoginPage = () => {
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300">
                 Hero Kidz
               </p>
-              <p className="mt-1 text-[9px] text-slate-300">Learn • Play • Grow</p>
+              <p className="mt-1 text-[9px] text-slate-300">
+                Learn • Play • Grow
+              </p>
             </div>
           </div>
         </motion.div>
