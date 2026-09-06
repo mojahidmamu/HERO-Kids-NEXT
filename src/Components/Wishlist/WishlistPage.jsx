@@ -1,7 +1,7 @@
 // src/Components/Wishlist/WishlistPage.jsx
 "use client";
 
-import { useWishlist } from "@/context/WishlistContext";
+import { useWishlist } from "@/src/Components/context/WishlistContext";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
