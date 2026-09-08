@@ -1,4 +1,4 @@
-// src/app/blog/[slug]/page.jsx
+ 
 import { getAllPostSlugs, getPostData } from "@/src/lib/blog";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -11,31 +11,40 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-   
-  if (!params?.slug) {
+  // ✅ params কে await করুন
+  const { slug } = await params;
+
+  if (!slug) {
     return { title: "Post Not Found" };
   }
 
   try {
-    const post = getPostData(params.slug);
+    const post = getPostData(slug);
     return {
       title: `${post.title} - Hero Kidz Blog`,
       description: post.description || post.title,
+      openGraph: {
+        title: post.title,
+        description: post.description || post.title,
+        images: post.coverImage ? [post.coverImage] : [],
+      },
     };
   } catch (error) {
     return { title: "Post Not Found" };
   }
 }
 
-export default function BlogPost({ params }) {
-  
-  if (!params?.slug) {
+export default async function BlogPost({ params }) {
+  // ✅ params কে await করুন
+  const { slug } = await params;
+
+  if (!slug) {
     notFound();
   }
 
   let post;
   try {
-    post = getPostData(params.slug);
+    post = getPostData(slug);
   } catch (error) {
     console.error("Error loading post:", error);
     notFound();
