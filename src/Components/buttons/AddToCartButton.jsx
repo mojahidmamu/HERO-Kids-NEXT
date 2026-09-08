@@ -30,7 +30,7 @@ const AddToCartButton = ({ product, className = "" }) => {
         );
       }, 1500);
       return;
-    }
+    }                       
 
     // লোডিং হলে কিছু করবে না
     if (status === "loading") return;

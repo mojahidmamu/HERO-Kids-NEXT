@@ -149,16 +149,7 @@ const LoginPage = () => {
               </motion.button>
             </div>
 
-            {/* সাইনআপ লিংক */}
-            <p className="mt-6 text-center text-sm text-slate-500">
-              Don't have an account?{" "}
-              <Link
-                href="/register"
-                className="font-semibold text-pink-500 hover:underline"
-              >
-                Sign up
-              </Link>
-            </p>
+            
 
             {/* ব্র্যান্ড */}
             <div className="mt-6 text-center">
