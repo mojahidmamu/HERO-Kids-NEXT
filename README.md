@@ -237,7 +237,7 @@ Design Features
 
 -----------------------------
 
-🤝 Contributing
+# 🤝 Contributing
 We welcome contributions! Please follow these steps:
 
 Fork the repository
@@ -250,12 +250,7 @@ Push to branch: git push origin feature/amazing-feature
 
 Open a Pull Request
 
-👥 Team
-Role Name GitHub
-Lead Developer Your Name @yourusername
-📄 License
-All assets and code are proprietary to Hero Kidz. All rights reserved.
-
+ 
 # Acknowledgments
 Next.js - React Framework
 
@@ -272,10 +267,10 @@ All open-source contributors
 ------------------------
 
 📫 Connect With Us
-Website: [hero-kidz.vercel.app](https://hero-kids-next.vercel.app/)
+Website: [Live Link](https://hero-kids-next.vercel.app/)
 
 Email: abdullahallmojahidstudent@gmail.com
 
-GitHub:[ github.com/yourusername/hero-kidz](https://github.com/mojahidmamu/HERO-Kids-NEXT)
+GitHub:[Hero Kidz Github Repo](https://github.com/mojahidmamu/HERO-Kids-NEXT)
 
 <div align="center"> <h3>⭐ Made with ❤️ by Hero Kidz Team -[Abdullah all Mojahid] ⭐</h3> <p><strong>Learn • Play • Grow</strong></p> </div>
