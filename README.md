@@ -7,26 +7,36 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 ✨ Live Demo: hero-kidz.vercel.app
 
-🌟 Key Features: 
+🌟 Key Features
 🛍️ Core E-Commerce
 📋 Product Catalog - Browse 20+ curated educational toys & accessories
+
 🔍 Advanced Search & Filtering - Category, price range, rating filters
+
 🛒 Dynamic Shopping Cart - Add/remove items, update quantities, real-time total
+
 ❤️ Wishlist - Save favorite products with localStorage persistence
 
 📦 Order Management - Track orders, view order history
 
-🔐 Authentication & Security: 
+🔐 Authentication & Security
 🔑 Google OAuth 2.0 - One-click sign-in with Google
+
 🛡️ Protected Routes - Middleware-based route protection
+
 👤 User Profile - Dynamic profile with avatar, member since date
+
 🔒 Secure Session Management - NextAuth.js with JWT
 
-🎨 User Experience: 
+🎨 User Experience
 📱 Fully Responsive - Works on all devices (mobile-first)
+
 🌙 Modern UI/UX - Clean, colorful, child-friendly design
+
 ⚡ Smooth Animations - Framer Motion powered interactions
+
 📧 Contact Form - Nodemailer integration for customer inquiries
+
 📝 Dynamic Blog - Markdown-based content management
 
 🛠️ Technical Features
