@@ -1,4 +1,4 @@
- 
+// src/app/api/contact/route.js
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
@@ -6,7 +6,7 @@ export async function POST(request) {
   try {
     const { name, email, subject, message } = await request.json();
 
-     
+    // 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -14,22 +14,36 @@ export async function POST(request) {
       );
     }
 
-    // Nodemailer ট্রান্সপোর্টার তৈরি
+    //  
+    const { EMAIL_USER, EMAIL_PASS, EMAIL_HOST, EMAIL_PORT } = process.env;
+    if (!EMAIL_USER || !EMAIL_PASS || !EMAIL_HOST || !EMAIL_PORT) {
+      console.error("Missing email environment variables");
+      return NextResponse.json(
+        { error: "Email configuration error. Please contact support." },
+        { status: 500 },
+      );
+    }
+
+    // Nodemailer transporter 
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT),
-      secure: false, // true for 465, false for other ports
+      host: EMAIL_HOST,
+      port: parseInt(EMAIL_PORT),
+      secure: EMAIL_PORT === "465",  
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false, 
       },
     });
 
-    // ইমেইল অপশন
+    // 
     const mailOptions = {
-      from: `"${name}" <${email}>`,
-      to: process.env.EMAIL_USER,
-      subject: `Contact Form: ${subject}`,
+      from: `"${name}" <${EMAIL_USER}>`, 
+      to: EMAIL_USER,
+      subject: `HERO-KidZ Contact Form: ${subject}`,
+      replyTo: email,  
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px;">
           <h2 style="color: #ec4899; border-bottom: 2px solid #fce7f3; padding-bottom: 10px;">New Contact Message</h2>
@@ -46,7 +60,6 @@ export async function POST(request) {
       `,
     };
 
-    // ইমেইল পাঠানো
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
