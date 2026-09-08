@@ -37,7 +37,7 @@ const CartPage = () => {
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
         <div className="text-8xl">🛒</div>
         <h2 className="mt-6 text-2xl font-bold text-slate-800">
-          Your cart is empty
+          Your cart is empty !
         </h2>
         <p className="mt-2 text-slate-500">
           Looks like you haven't added any items yet

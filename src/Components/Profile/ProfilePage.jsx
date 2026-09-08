@@ -1,3 +1,4 @@
+// src/Components/Profile/ProfilePage.jsx
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
@@ -13,16 +14,39 @@ import {
   FiHome,
   FiShoppingBag,
   FiHeart,
-  FiSettings,
   FiArrowRight,
 } from "react-icons/fi";
 import { FaGoogle } from "react-icons/fa";
+import { useCart } from "@/src/Components/context/CartContext";
+import { useWishlist } from "@/src/Components/context/WishlistContext";
+import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
+  // ✅ সব হুক একসাথে, শুরুতেই
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { getTotalItems } = useCart();
+  const { wishlistItems } = useWishlist();
 
-  // লোডিং স্টেট
+  const [memberSince, setMemberSince] = useState("");
+
+  // ✅ useEffect - শর্তহীনভাবে কল হবে, কিন্তু ভিতরে শর্ত দিয়ে কাজ করবে
+  useEffect(() => {
+    if (status === "authenticated") {
+      const storedDate = localStorage.getItem("memberSince");
+      if (storedDate) {
+        setMemberSince(storedDate);
+      } else {
+        const now = new Date();
+        const options = { year: "numeric", month: "long" };
+        const formattedDate = now.toLocaleDateString("en-US", options);
+        localStorage.setItem("memberSince", formattedDate);
+        setMemberSince(formattedDate);
+      }
+    }
+  }, [status]); // status পরিবর্তন হলে রান হবে
+
+  // ✅ এখন early return গুলো সব হুকের পরে আসবে
   if (status === "loading") {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -34,7 +58,6 @@ const ProfilePage = () => {
     );
   }
 
-  // লগইন না থাকলে লগইন পেজে রিডাইরেক্ট
   if (status === "unauthenticated") {
     router.push("/login");
     return null;
@@ -43,12 +66,12 @@ const ProfilePage = () => {
   const user = session?.user;
   const { name, email, image } = user || {};
 
-  const memberSince = "January 2025";
-  const orders = 12;
-  const wishlist = 5;
+  const orders = getTotalItems();
+  const wishlistCount = wishlistItems.length;
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50 py-8">
+      {/* ... বাকি JSX আগের মতোই থাকবে ... */}
       <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink-300/20 blur-3xl" />
       <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-purple-300/20 blur-3xl" />
       <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-200/20 blur-3xl" />
@@ -132,7 +155,7 @@ const ProfilePage = () => {
                 <p className="text-sm text-slate-600">Total Orders</p>
               </div>
               <div className="rounded-2xl bg-purple-50 p-4 text-center transition-all hover:shadow-md">
-                <p className="text-2xl font-bold text-purple-500">{wishlist}</p>
+                <p className="text-2xl font-bold text-purple-500">{wishlistCount}</p>
                 <p className="text-sm text-slate-600">Wishlist Items</p>
               </div>
               <div className="rounded-2xl bg-blue-50 p-4 text-center transition-all hover:shadow-md">
@@ -178,7 +201,9 @@ const ProfilePage = () => {
                   <p className="text-xs font-medium uppercase text-slate-400">
                     Member Since
                   </p>
-                  <p className="font-semibold text-slate-800">{memberSince}</p>
+                  <p className="font-semibold text-slate-800">
+                    {memberSince || "Loading..."}
+                  </p>
                 </div>
               </div>
 
