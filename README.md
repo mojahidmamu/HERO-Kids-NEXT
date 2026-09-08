@@ -266,11 +266,14 @@ All open-source contributors
 
 ------------------------
 
-📫 Connect With Us
-Website: [Live Link](https://hero-kids-next.vercel.app/)
+# 📫 Connect With Us
+Auther Github Profile: [Abdullah all Mojahid ](https://github.com/mojahidmamu)
 
 Email: abdullahallmojahidstudent@gmail.com
 
 GitHub:[Hero Kidz Github Repo](https://github.com/mojahidmamu/HERO-Kids-NEXT)
+
+Website: [Live Link](https://hero-kids-next.vercel.app/)
+
 
 <div align="center"> <h3>⭐ Made with ❤️ by Hero Kidz Team -[Abdullah all Mojahid] ⭐</h3> <p><strong>Learn • Play • Grow</strong></p> </div>
