@@ -9,6 +9,7 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 🌟 Key Features
 🛍️ Core E-Commerce
+
 📋 Product Catalog - Browse 20+ curated educational toys & accessories
 
 🔍 Advanced Search & Filtering - Category, price range, rating filters
@@ -18,6 +19,8 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 ❤️ Wishlist - Save favorite products with localStorage persistence
 
 📦 Order Management - Track orders, view order history
+
+-----------------------
 
 🔐 Authentication & Security
 🔑 Google OAuth 2.0 - One-click sign-in with Google
