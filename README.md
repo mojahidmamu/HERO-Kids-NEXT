@@ -7,7 +7,10 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 ✨ Live Demo: hero-kidz.vercel.app
 
-🌟 Key Features
+-----------------------
+
+🌟 Key Features: --- 
+
 🛍️ Core E-Commerce
 
 📋 Product Catalog - Browse 20+ curated educational toys & accessories
@@ -22,7 +25,8 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 -----------------------
 
-🔐 Authentication & Security
+🔐 Authentication & Security: --- 
+
 🔑 Google OAuth 2.0 - One-click sign-in with Google
 
 🛡️ Protected Routes - Middleware-based route protection
@@ -31,7 +35,10 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 🔒 Secure Session Management - NextAuth.js with JWT
 
-🎨 User Experience
+-----------------------
+
+🎨 User Experience: --- 
+
 📱 Fully Responsive - Works on all devices (mobile-first)
 
 🌙 Modern UI/UX - Clean, colorful, child-friendly design
@@ -42,7 +49,10 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 📝 Dynamic Blog - Markdown-based content management
 
-🛠️ Technical Features
+-----------------------
+
+🛠️ Technical Features: --- 
+
 🏗️ App Router - Next.js 15 latest architecture
 
 🎯 Server Components - Optimized performance
@@ -51,94 +61,32 @@ Hero Kidz is a production-ready, full-stack e-commerce web application designed 
 
 📊 Analytics Ready - SEO-optimized metadata
 
+-----------------------
+
 🛠️ Technology Stack
-Frontend
-Technology Purpose
-Next.js 15 React Framework (App Router)
-React 19 UI Library
-Tailwind CSS Utility-first CSS
-DaisyUI Component Library
-Framer Motion Animations
-React Icons Icon Library
-Backend & Authentication
-Technology Purpose
-NextAuth.js Authentication (Google OAuth)
-Nodemailer Email sending (Contact form)
-Gray-Matter Markdown parsing
-Remark Markdown to HTML
-Development Tools
-Technology Purpose
-ESLint Code linting
-PostCSS CSS processing
-Vercel Deployment
-📂 Project Structure
-text
-hero-kidz/
-├── src/
-│ ├── app/
-│ │ ├── api/
-│ │ │ ├── auth/[...nextauth]/ # NextAuth configuration
-│ │ │ └── contact/route.js # Contact form API
-│ │ ├── blog/ # Blog pages
-│ │ │ ├── page.jsx # Blog listing
-│ │ │ └── [slug]/page.jsx # Dynamic blog post
-│ │ ├── cart/page.jsx # Shopping cart
-│ │ ├── contact/page.jsx # Contact page
-│ │ ├── login/page.jsx # Login page
-│ │ ├── products/ # Product pages
-│ │ │ ├── page.jsx # Product listing
-│ │ │ └── [id]/page.jsx # Dynamic product details
-│ │ ├── profile/page.jsx # User profile
-│ │ ├── wishlist/page.jsx # Wishlist page
-│ │ └── layout.jsx # Root layout with providers
-│ ├── Components/
-│ │ ├── Auth/
-│ │ │ └── LoginPage.jsx # Login component
-│ │ ├── Blog/
-│ │ │ ├── BlogCard.jsx # Blog post card
-│ │ │ └── BlogList.jsx # Blog listing component
-│ │ ├── Cart/
-│ │ │ └── CartPage.jsx # Cart page component
-│ │ ├── Contact/
-│ │ │ └── ContactPage.jsx # Contact form
-│ │ ├── Home/
-│ │ │ └── Banner.jsx # Hero banner
-│ │ ├── Layouts/
-│ │ │ ├── Navbar.jsx # Navigation with user menu
-│ │ │ └── Footer.jsx # Footer component
-│ │ ├── Products/
-│ │ │ ├── Products.jsx # Product listing with filters
-│ │ │ └── ProductDetails.jsx # Product details component
-│ │ ├── Profile/
-│ │ │ └── ProfilePage.jsx # User profile
-│ │ ├── UI/
-│ │ │ ├── AddToCartButton.jsx # Add to cart button
-│ │ │ ├── BuyNowButton.jsx # Buy now button
-│ │ │ └── CartModal.jsx # Success modal
-│ │ └── Wishlist/
-│ │ └── WishlistPage.jsx # Wishlist component
-│ ├── context/
-│ │ ├── CartContext.jsx # Cart state management
-│ │ └── WishlistContext.jsx # Wishlist state management
-│ ├── content/
-│ │ └── blog/ # Markdown blog posts
-│ │ ├── top-10-educational-toys.md
-│ │ ├── how-to-choose-safe-toys.md
-│ │ └── ... (5 blog posts)
-│ ├── data/
-│ │ └── toys.json # Product data (20+ products)
-│ ├── lib/
-│ │ └── blog.js # Markdown parsing utilities
-│ ├── providers/
-│ │ └── SessionProvider.jsx # NextAuth session provider
-│ └── middleware.js # Route protection
-├── public/
-│ └── assets/ # Images, fonts, icons
-├── .env.local # Environment variables
-├── next.config.js # Next.js configuration
-├── tailwind.config.js # Tailwind configuration
-├── package.json # Dependencies
-└── README.md # Project documentation
+-----------------------   
+Frontend: --------------
+Technology Purpose,
+Next.js 15 React Framework (App Router),
+React 19 UI Library,
+Tailwind CSS Utility-first CSS,
+DaisyUI Component Library,
+Framer Motion Animations,
+React Icons Icon Library,
+Backend & Authentication,
+Technology Purpose,
+NextAuth.js Authentication (Google OAuth),
+Nodemailer Email sending (Contact form),
+Gray-Matter Markdown parsing,
+Remark Markdown to HTML,
+Development Tools,
+Technology Purpose,
+ESLint Code linting,
+PostCSS CSS processing,
+Vercel Deployment,
+
+-----------------------
+
 🚀 Getting Started
 Prerequisites
 Node.js (v18.17 or higher)
@@ -152,7 +100,7 @@ bash
 
 # 1. Clone the repository
 
-git clone https://github.com/yourusername/hero-kidz.git
+git clone https://github.com/mojahidmamu/HERO-Kids-NEXT
 cd hero-kidz
 
 # 2. Install dependencies
@@ -214,6 +162,8 @@ Copy the 16-character password to EMAIL_PASS
 📦 Available Scripts
 bash
 
+-----------------------------
+
 # Development
 
 npm run dev # Start development server
@@ -263,8 +213,11 @@ Design Features
 
 ✅ Accessible - Semantic HTML, ARIA labels
 
-📊 Real-World Impact
-For Parents
+
+----------------------------------
+
+# 📊 Real-World Impact
+# For Parents
 🧠 Educational Focus - Products that promote learning through play
 
 🔒 Safety First - All products are non-toxic & child-safe
@@ -273,7 +226,7 @@ For Parents
 
 🚚 Convenience - Easy online shopping from home
 
-For Business
+#  For Business
 📈 Scalable - Easy to add new products and categories
 
 🎯 Targeted Marketing - Blog content drives organic traffic
@@ -281,6 +234,8 @@ For Business
 💬 Customer Engagement - Contact form & feedback system
 
 📱 Mobile-Optimized - Reach customers on all devices
+
+-----------------------------
 
 🤝 Contributing
 We welcome contributions! Please follow these steps:
@@ -301,7 +256,7 @@ Lead Developer Your Name @yourusername
 📄 License
 All assets and code are proprietary to Hero Kidz. All rights reserved.
 
-🙏 Acknowledgments
+# Acknowledgments
 Next.js - React Framework
 
 NextAuth.js - Authentication
@@ -314,11 +269,13 @@ Framer Motion - Animations
 
 All open-source contributors
 
+------------------------
+
 📫 Connect With Us
-Website: hero-kidz.vercel.app
+Website: [hero-kidz.vercel.app](https://hero-kids-next.vercel.app/)
 
-Email: support@herokidz.com
+Email: abdullahallmojahidstudent@gmail.com
 
-GitHub: github.com/yourusername/hero-kidz
+GitHub:[ github.com/yourusername/hero-kidz](https://github.com/mojahidmamu/HERO-Kids-NEXT)
 
-<div align="center"> <h3>⭐ Made with ❤️ by Hero Kidz Team ⭐</h3> <p><strong>Learn • Play • Grow</strong></p> </div>
+<div align="center"> <h3>⭐ Made with ❤️ by Hero Kidz Team -[Abdullah all Mojahid] ⭐</h3> <p><strong>Learn • Play • Grow</strong></p> </div>
