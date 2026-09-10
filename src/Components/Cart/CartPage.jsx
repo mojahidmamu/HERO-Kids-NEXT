@@ -15,6 +15,7 @@ import {
   FiMinus,
   FiPlus,
 } from "react-icons/fi";
+import CheckoutButton from "../Checkout/CheckoutButton";
 
 const CartPage = () => {
   const {
@@ -31,7 +32,7 @@ const CartPage = () => {
   const deliveryCharge = totalPrice > 1000 ? 0 : 50;
   const totalWithDelivery = totalPrice + deliveryCharge;
 
-  // 
+  //
   if (cartItems.length === 0) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
@@ -149,9 +150,15 @@ const CartPage = () => {
             </div>
 
             {/*   */}
-            <button className="mt-4 w-full rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 py-4 font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl">
+            {/* <Link
+              href="/checkout"
+              className="mt-6 block rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 px-6 py-3 text-center font-bold text-white shadow-lg shadow-pink-200 transition-all hover:scale-105 hover:shadow-xl"
+            >
               Proceed to Checkout
-            </button>
+            </Link> */}
+            <div className="mt-6">
+              <CheckoutButton></CheckoutButton>
+            </div>
           </div>
         </div>
       </div>
@@ -160,10 +167,8 @@ const CartPage = () => {
 };
 
 export default CartPage;
- 
 
-
-// Cart Item page in smae file:  
+// Cart Item page in smae file:
 const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
   const {
     id,
@@ -228,7 +233,6 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
 
       {/*   */}
       <div className="flex items-center gap-4 sm:ml-auto">
-        
         <div className="min-w-[80px] text-right">
           <span className="text-lg font-bold text-pink-500">৳{totalPrice}</span>
           {discount > 0 && (
@@ -238,7 +242,6 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
           )}
         </div>
 
-         
         <div className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1">
           <button
             onClick={() => onUpdateQuantity(id, quantity - 1)}
@@ -257,7 +260,6 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
           </button>
         </div>
 
-        
         <button
           onClick={() => onRemove(id)}
           className="flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 transition-all hover:bg-red-50 hover:text-red-500"
@@ -268,7 +270,6 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
     </motion.div>
   );
 };
- 
 
 const FiStar = ({ className }) => (
   <svg

@@ -15,11 +15,14 @@ import {
   FiShoppingBag,
   FiHeart,
   FiArrowRight,
+  FiCreditCard,
+  FiCheckCircle,
 } from "react-icons/fi";
 import { FaGoogle } from "react-icons/fa";
 import { useCart } from "@/src/Components/context/CartContext";
 import { useWishlist } from "@/src/Components/context/WishlistContext";
 import { useEffect, useState } from "react";
+import { usePayments } from "../context/PaymentContext";
 
 const ProfilePage = () => {
   // ✅ সব হুক একসাথে, শুরুতেই
@@ -29,6 +32,9 @@ const ProfilePage = () => {
   const { wishlistItems } = useWishlist();
 
   const [memberSince, setMemberSince] = useState("");
+
+  const { payments } = usePayments();
+  const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
 
   // ✅ useEffect - শর্তহীনভাবে কল হবে, কিন্তু ভিতরে শর্ত দিয়ে কাজ করবে
   useEffect(() => {
@@ -71,11 +77,9 @@ const ProfilePage = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-purple-50 py-8">
-       
       <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-pink-300/20 blur-3xl" />
       <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-purple-300/20 blur-3xl" />
       <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-200/20 blur-3xl" />
-
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 3, repeat: Infinity }}
@@ -90,7 +94,6 @@ const ProfilePage = () => {
       >
         🌟
       </motion.div>
-
       <div className="relative mx-auto max-w-4xl px-4">
         <div className="mb-6 flex items-center justify-between">
           <Link
@@ -155,7 +158,9 @@ const ProfilePage = () => {
                 <p className="text-sm text-slate-600">Total Orders</p>
               </div>
               <div className="rounded-2xl bg-purple-50 p-4 text-center transition-all hover:shadow-md">
-                <p className="text-2xl font-bold text-purple-500">{wishlistCount}</p>
+                <p className="text-2xl font-bold text-purple-500">
+                  {wishlistCount}
+                </p>
                 <p className="text-sm text-slate-600">Wishlist Items</p>
               </div>
               <div className="rounded-2xl bg-blue-50 p-4 text-center transition-all hover:shadow-md">
@@ -248,6 +253,60 @@ const ProfilePage = () => {
             </div>
           </div>
         </motion.div>
+      </div>
+
+
+
+      {/* Add this section after the stats grid: */}
+      <div className="mt-8">
+        <h2 className="text-xl font-bold text-slate-800 mb-4">
+          💳 Payment History
+        </h2>
+
+        {payments.length === 0 ? (
+          <div className="rounded-2xl bg-slate-50 p-8 text-center">
+            <FiCreditCard className="mx-auto text-4xl text-slate-300" />
+            <p className="mt-2 text-slate-500">No payments yet</p>
+            <p className="text-sm text-slate-400">
+              Your payment history will appear here
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {payments.map((payment, index) => (
+              <div
+                key={payment.id || index}
+                className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm border border-slate-100"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-500">
+                    <FiCheckCircle size={20} />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-800">
+                      {payment.itemCount} item(s)
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      {new Date(payment.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold text-pink-500">৳{payment.amount}</p>
+                  <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-600">
+                    Paid
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
